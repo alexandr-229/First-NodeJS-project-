@@ -5,7 +5,7 @@ import { IExeptionFilter } from './errors/exeption.filter.interface';
 import { ILogger } from './logger/logger.interface';
 import { LoggerService } from './logger/logger.service';
 import { TYPES } from './types';
-import { UserCotroller } from './users/users.contrller';
+import { UserController } from './users/users.contrller';
 import { IUserController } from './users/user.controller.interface';
 import { UserService } from './users/users.service';
 import { IUserService } from './users/users.service,interface';
@@ -23,7 +23,7 @@ interface bootstrapReturn {
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<ILogger>(TYPES.ILogger).to(LoggerService).inSingletonScope();
 	bind<IExeptionFilter>(TYPES.IExeptionFilter).to(ExeptionFilter);
-	bind<IUserController>(TYPES.IUserCotroller).to(UserCotroller);
+	bind<IUserController>(TYPES.IUserController).to(UserController);
 	bind<IUserService>(TYPES.IUserService).to(UserService);
 	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
 	bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
