@@ -3,7 +3,7 @@ import { Server } from 'http';
 import { inject, injectable } from 'inversify';
 import { ILogger } from './logger/logger.interface';
 import { TYPES } from './types';
-import { UserCotroller } from './users/users.contrller';
+import { UserController } from './users/users.contrller';
 import 'reflect-metadata';
 import { IExeptionFilter } from './errors/exeption.filter.interface';
 import { json } from 'body-parser';
@@ -19,19 +19,19 @@ export class App {
 
 	constructor(
 		@inject(TYPES.ILogger) private logger: ILogger,
-		@inject(TYPES.IUserCotroller) private userController: UserCotroller,
+		@inject(TYPES.IUserCotroller) private userController: UserController,
 		@inject(TYPES.IExeptionFilter) private exeptionFilter: IExeptionFilter,
 		@inject(TYPES.ConfigService) private configService: IConfigService,
 		@inject(TYPES.PrismaService) private prismaService: PrismaService,
-    ) {
+	) {
 		this.app = express();
 		this.port = 8000;
 	}
 
-	useMiddleware() {
+	useMiddleware(): void {
 		this.app.use(json());
 		const authMiddleware = new AuthMiddleware(this.configService.get('SECRET'));
-		this.app.use(authMiddleware.exicute.bind(authMiddleware))
+		this.app.use(authMiddleware.exicute.bind(authMiddleware));
 	}
 
 	useRouter(): void {
@@ -51,7 +51,7 @@ export class App {
 		this.logger.log(`Server running on port ${this.port}`);
 	}
 
-	public close(): void{
-		this.server.close()
+	public close(): void {
+		this.server.close();
 	}
 }

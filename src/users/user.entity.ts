@@ -1,9 +1,9 @@
 import { compare, hash } from 'bcryptjs';
-import 'reflect-metadata'
+import 'reflect-metadata';
 
 export class User {
 	private _password: string;
-	
+
 	constructor(
 		private readonly _email: string,
 		private readonly _name: string,
@@ -23,7 +23,7 @@ export class User {
 	}
 
 	get password(): string {
-		return this._password
+		return this._password;
 	}
 
 	public async setPassword(pass: string, salt: number): Promise<void> {
